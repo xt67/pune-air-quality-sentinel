@@ -175,13 +175,13 @@
 
 | Phase | Status | Started | Completed |
 |-------|--------|---------|-----------|
-| Phase 1: Data Pipeline & IoT Simulation | 🔲 Pending | - | - |
+| Phase 1: Data Pipeline & IoT Simulation | 📋 Planning Complete | 2026-04-02 | - |
 | Phase 2: ARIMA & LSTM Models | 🔲 Pending | - | - |
 | Phase 3: ST-GNN & Full Evaluation | 🔲 Pending | - | - |
 | Phase 4: Geospatial Visualization | 🔲 Pending | - | - |
 | Phase 5: Streamlit Demo & Documentation | 🔲 Pending | - | - |
 
-**Legend:** 🔲 Pending | 🔄 In Progress | ✅ Complete | ⚠️ Blocked
+**Legend:** 🔲 Pending | 📋 Planning Complete | 🔄 In Progress | ✅ Complete | ⚠️ Blocked
 
 ---
 
