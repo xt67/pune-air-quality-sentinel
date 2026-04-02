@@ -1,0 +1,24 @@
+# Ralph Progress Tracker
+
+## Project: Pune Air Quality Sentinel (PAQS)
+## Branch: ralph/paqs-v1
+## Started: 2026-04-02
+
+---
+
+## Iteration Log
+
+| Iteration | Story ID | Status | Notes |
+|-----------|----------|--------|-------|
+| - | - | - | Not started |
+
+---
+
+## Summary
+
+- **Total Stories:** 58
+- **Completed:** 0
+- **In Progress:** 0
+- **Remaining:** 58
+
+---
