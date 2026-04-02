@@ -1,0 +1,79 @@
+# GSD Planning (local only)
+.planning/
+ralph/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data directories (too large for git)
+data/raw/
+data/processed/
+data/simulated/
+data/splits/
+data/graph/*.npy
+
+# Model checkpoints
+models/*.pkl
+models/*.pth
+models/*.joblib
+
+# Output files
+outputs/
+*.html
+
+# Logs
+logs/
+*.log
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Kaggle credentials (NEVER commit!)
+kaggle.json
+.kaggle/
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
