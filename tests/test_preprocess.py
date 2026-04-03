@@ -287,7 +287,7 @@ class TestNormalizeFeatures:
         numeric_cols = result.select_dtypes(include=[np.number]).columns
         for col in numeric_cols:
             assert result[col].min() >= 0
-            assert result[col].max() <= 1
+            assert result[col].max() <= 1 + 1e-9  # Allow floating point precision tolerance
     
     def test_normalize_saves_scaler(self, sample_aqi_df, tmp_path):
         """Test that scaler is saved."""

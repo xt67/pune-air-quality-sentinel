@@ -166,27 +166,12 @@ def compute_aqi_row(row: pd.Series) -> float:
     )
 
 
-def clean_aqi_data(
+def _clean_single_node(
     df: pd.DataFrame,
     gap_fill_limit: int = 3,
     interpolate_limit: int = 12
 ) -> pd.DataFrame:
-    """
-    Clean AQI data with gap filling strategy.
-    
-    Strategy:
-    - Forward-fill gaps up to gap_fill_limit hours
-    - Linear interpolation for gaps up to interpolate_limit hours
-    - Drop remaining gaps (>interpolate_limit hours)
-    
-    Args:
-        df: Input DataFrame with 'timestamp' column
-        gap_fill_limit: Max hours for forward-fill (default: 3)
-        interpolate_limit: Max hours for interpolation (default: 12)
-        
-    Returns:
-        Cleaned DataFrame
-    """
+    """Clean a single node's data (no node_id grouping)."""
     df = df.sort_values("timestamp").reset_index(drop=True)
     
     # Ensure hourly frequency
@@ -209,9 +194,49 @@ def clean_aqi_data(
         filled = original_nan - remaining_nan
         
         if filled > 0:
-            logger.info(f"Filled {filled} gaps in {col}")
-        if remaining_nan > 0:
-            logger.warning(f"Dropping {remaining_nan} rows with >12h gaps in {col}")
+            logger.debug(f"Filled {filled} gaps in {col}")
+    
+    return df
+
+
+def clean_aqi_data(
+    df: pd.DataFrame,
+    gap_fill_limit: int = 3,
+    interpolate_limit: int = 12
+) -> pd.DataFrame:
+    """
+    Clean AQI data with gap filling strategy.
+    
+    Strategy:
+    - Forward-fill gaps up to gap_fill_limit hours
+    - Linear interpolation for gaps up to interpolate_limit hours
+    - Drop remaining gaps (>interpolate_limit hours)
+    
+    Args:
+        df: Input DataFrame with 'timestamp' column
+        gap_fill_limit: Max hours for forward-fill (default: 3)
+        interpolate_limit: Max hours for interpolation (default: 12)
+        
+    Returns:
+        Cleaned DataFrame
+    """
+    # Handle multi-node data by processing each node separately
+    if "node_id" in df.columns:
+        node_ids = df["node_id"].unique()
+        cleaned_dfs = []
+        
+        for node_id in node_ids:
+            node_df = df[df["node_id"] == node_id].copy()
+            cleaned_node = _clean_single_node(node_df, gap_fill_limit, interpolate_limit)
+            cleaned_node["node_id"] = node_id
+            cleaned_dfs.append(cleaned_node)
+        
+        df = pd.concat(cleaned_dfs, ignore_index=True)
+        df = df.sort_values(["timestamp", "node_id"]).reset_index(drop=True)
+    else:
+        df = _clean_single_node(df, gap_fill_limit, interpolate_limit)
+    
+    numeric_cols = df.select_dtypes(include=[np.number]).columns
     
     # Drop rows with any remaining NaN in critical columns
     critical_cols = ["pm25", "pm10", "aqi"]
