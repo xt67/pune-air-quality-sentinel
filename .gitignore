@@ -127,6 +127,8 @@ models/*.joblib
 
 # Outputs
 outputs/
+!outputs/comparison_table.csv
+!outputs/comparison_table.md
 outputs/logs/*.log
 outputs/plots/*.png
 outputs/heatmaps/*.html

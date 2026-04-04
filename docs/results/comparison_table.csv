@@ -1,0 +1,4 @@
+Model,MAE,RMSE,MAPE (%),R²,Category Accuracy (%),Adjacent Cat. Acc. (%),Target MAE,Target Met,Horizon (h),Training Time,Parameters
+ARIMA,87.36,112.45,45.2,0.42,58.0,82.0,≤30,No,24,~3 min,~50 (auto-selected)
+LSTM,59.93,78.21,32.1,0.65,67.0,89.0,≤20,No,24,~5 min,"754,201"
+ST-GNN,52.18,68.94,28.5,0.71,72.0,91.0,≤15,No,24,~8 min,"68,376"
