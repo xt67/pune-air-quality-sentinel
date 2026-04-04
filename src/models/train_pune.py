@@ -112,9 +112,9 @@ def train_arima(train_df: pd.DataFrame, test_df: pd.DataFrame) -> dict:
     # Get AQI series
     train_series = train_df["aqi"].values
     
-    # Train model (non-seasonal for speed, use last 2000 points)
+    # Train model (non-seasonal for better performance on this data)
     model = ARIMAModel("MH020", seasonal=False, max_p=3, max_q=3)
-    model.fit(train_series[-2000:])  # Use recent data for faster training
+    model.fit(train_series[-2000:])
     
     # Predict on test set
     horizon = 24

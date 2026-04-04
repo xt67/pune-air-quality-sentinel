@@ -58,7 +58,10 @@ class Trainer:
         
         # Loss and optimizer
         self.criterion = nn.HuberLoss()
-        self.optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+        self.optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=1e-4)
+        self.scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+            self.optimizer, mode='min', factor=0.5, patience=5, verbose=True
+        )
         
         # Mixed precision
         self.use_amp = use_amp and device == "cuda"
@@ -175,6 +178,9 @@ class Trainer:
                 best_path = self.checkpoint_dir / "lstm_best.pth"
                 self.save_checkpoint(str(best_path), epoch, val_mae)
                 logger.info(f"New best model: MAE={val_mae:.2f}")
+            
+            # Learning rate scheduler step
+            self.scheduler.step(val_mae)
             
             # Early stopping
             if early_stopping(val_mae):
