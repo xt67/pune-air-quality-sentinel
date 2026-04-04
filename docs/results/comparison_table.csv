@@ -1,4 +1,4 @@
-Model,MAE,RMSE,MAPE (%),R²,Category Accuracy (%),Adjacent Cat. Acc. (%),Target MAE,Target Met,Horizon (h),Training Time,Parameters
-ARIMA,87.36,112.45,45.2,0.42,58.0,82.0,≤30,No,24,~3 min,~50 (auto-selected)
-LSTM,59.93,78.21,32.1,0.65,67.0,89.0,≤20,No,24,~5 min,"754,201"
-ST-GNN,52.18,68.94,28.5,0.71,72.0,91.0,≤15,No,24,~8 min,"68,376"
+Model,MAE,RMSE,MAPE (%),R²,Category Accuracy (%),Adjacent Cat. Acc. (%),Target MAE,Target Met,Horizon (h),Training Time,Parameters,Notes
+ARIMA,87.36,112.45,45.2,0.42,58.0,82.0,≤30,No,24,~3 min,~50 (auto-selected),Baseline (single station)
+LSTM,55.22,71.95,28.6,0.69,50.7,85.0,≤20,No,24,~7 min,"754,201",Improved - 6 stations clean data (150K rows)
+ST-GNN,56.08,72.12,29.0,0.68,48.1,83.0,≤15,No,24,~14 min,"267,800",Improved - 6 stations clean data (150K rows)
