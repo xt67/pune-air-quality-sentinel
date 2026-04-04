@@ -1,14 +1,26 @@
 # Pune Air Quality Sentinel (PAQS)
 
-An AI-based air quality forecasting system that predicts hyper-local AQI values 24-48 hours in advance for specific Pune neighborhoods.
+AI-Based Air Quality Forecaster for Urban Pollution Monitoring
 
-## 🎯 Core Value
+## 🎯 Overview
 
-**Accurate, hyper-local AQI forecasting that answers: "Is it safe to take a morning run in my neighborhood tomorrow?"**
+PAQS forecasts hyper-local Air Quality Index (AQI) values 24-48 hours in advance for Pune neighborhoods. It combines time-series forecasting, geospatial analysis, and IoT simulation into a coherent ML pipeline.
+
+**Core Question:** "Is it safe to take a morning run in my neighborhood tomorrow?"
+
+**Models:** ARIMA (baseline) → LSTM → Spatio-Temporal GNN
+
+## ✨ Features
+
+- 🌍 **10 Pune neighborhoods** — Shivajinagar, Hinjewadi, Pimpri-Chinchwad, and more
+- 📊 **Multi-horizon forecasting** — 24h and 48h ahead predictions
+- 🗺️ **Interactive heatmap** — Folium-based pollution visualization
+- ⚡ **Health advisories** — AQI category labels with recommendations
 
 ## 🏗️ Project Structure
 
 ```
+pune-air-quality-sentinel/
 ├── app/                    # Streamlit application
 │   ├── components/         # Reusable UI components
 │   └── streamlit_app.py    # Main app entry point
@@ -43,25 +55,17 @@ An AI-based air quality forecasting system that predicts hyper-local AQI values 
 
 - Python 3.10+
 - CUDA 12.1 (for GPU acceleration)
-- Conda (recommended)
 
 ### Installation
 
 ```bash
-# Clone the repository
-git clone <repo-url>
+# Clone and setup
+git clone https://github.com/xt67/pune-air-quality-sentinel.git
 cd pune-air-quality-sentinel
-
-# Create conda environment
-conda create -n paqs python=3.10
-conda activate paqs
-
-# Install dependencies
 pip install -r requirements.txt
 
-# Copy environment variables
-cp .env.example .env
-# Edit .env with your Kaggle credentials
+# Set up Kaggle credentials (for data download)
+# Create .env with KAGGLE_API_TOKEN=your_token
 ```
 
 ### Data Pipeline
@@ -89,16 +93,6 @@ python -m src.models.train_lstm --config configs/lstm.yaml
 python -m src.models.train_stgnn --config configs/stgnn.yaml
 ```
 
-### Running Tests
-
-```bash
-# Run all tests
-pytest tests/ -v
-
-# Run specific test file
-pytest tests/test_fetch.py -v
-```
-
 ### Demo
 
 ```bash
@@ -121,37 +115,36 @@ streamlit run app/streamlit_app.py
 | N09 | Talegaon MIDC | Outer industrial |
 | N10 | Mundhwa | Downstream residential |
 
-## 📊 Model Performance Targets
+## 📊 Success Metrics
 
-| Model | MAE (AQI units) | RMSE |
-|-------|-----------------|------|
-| ARIMA | ≤30 | - |
-| LSTM | ≤20 | - |
-| ST-GNN | ≤12 | ≤18 |
+| Model | Target MAE (AQI) | RMSE |
+|-------|------------------|------|
+| ARIMA | ≤ 30 | - |
+| LSTM | ≤ 20 | - |
+| ST-GNN | ≤ 12 | ≤ 18 |
 
-## 📁 Configuration
+## 🛠️ Tech Stack
 
-All hyperparameters are stored in `configs/`:
-
-- `data.yaml`: Data paths, preprocessing parameters
-- `lstm.yaml`: LSTM architecture and training settings
-- `stgnn.yaml`: ST-GNN architecture and graph construction
+- **ML:** PyTorch, PyTorch Geometric, pmdarima
+- **Data:** Pandas, NumPy, GeoPandas
+- **Viz:** Folium, Matplotlib, Plotly
+- **App:** Streamlit, FastAPI
+- **Data Sources:** OpenAQ, Open-Meteo, Kaggle Air Quality India
 
 ## 🧪 Testing
 
 ```bash
-# Run full test suite with coverage
-pytest tests/ -v --cov=src --cov-report=html
+# Run full test suite
+pytest tests/ -v
 
-# Run only Phase 1 tests
-pytest tests/test_fetch.py tests/test_preprocess.py tests/test_iot_sim.py -v
+# Run with coverage
+pytest tests/ -v --cov=src --cov-report=html
 ```
 
 ## 📝 License
 
 MIT License
 
-## 🙏 Acknowledgments
+## 👨‍💻 Author
 
-- Data sources: OpenAQ, Open-Meteo, Kaggle Air Quality India
-- Built with: PyTorch, PyTorch Geometric, Streamlit, Folium
+Rayan — B.Tech Final Year Project (Data Science / AI-ML)

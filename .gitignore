@@ -1,12 +1,12 @@
-# Byte-compiled / optimized / DLL files
+# GSD Planning (local only)
+.planning/
+ralph/
+
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
-
-# C extensions
 *.so
-
-# Distribution / packaging
 .Python
 build/
 develop-eggs/
@@ -68,7 +68,7 @@ docs/_build/
 target/
 
 # Jupyter Notebook
-.ipynb_checkpoints
+.ipynb_checkpoints/
 
 # IPython
 profile_default/
@@ -85,6 +85,7 @@ celerybeat-schedule
 
 # Environments
 .env
+.env.local
 .venv
 env/
 venv/
@@ -114,6 +115,8 @@ dmypy.json
 data/raw/
 data/processed/
 data/simulated/
+data/splits/
+data/graph/*.npy
 !data/graph/
 
 # Model checkpoints (large files)
@@ -123,9 +126,14 @@ models/*.pt
 models/*.joblib
 
 # Outputs
+outputs/
 outputs/logs/*.log
 outputs/plots/*.png
 outputs/heatmaps/*.html
+*.html
+
+# Logs
+logs/
 
 # IDE
 .idea/
@@ -138,8 +146,9 @@ outputs/heatmaps/*.html
 .DS_Store
 Thumbs.db
 
-# Kaggle credentials (sensitive)
+# Kaggle credentials (NEVER commit!)
 kaggle.json
+.kaggle/
 
 # W&B
 wandb/
