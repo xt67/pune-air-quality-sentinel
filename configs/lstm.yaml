@@ -1,0 +1,22 @@
+# LSTM model configuration
+model:
+  seq_len: 72
+  forecast_horizon: 24
+  hidden_size_1: 128
+  hidden_size_2: 64
+  num_attention_heads: 4
+  dropout: 0.2
+  fc_dropout: 0.3
+
+training:
+  batch_size: 64
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  epochs: 150
+  early_stopping_patience: 10
+  lr_scheduler_patience: 5
+  lr_scheduler_factor: 0.5
+  min_lr: 0.000001
+  gradient_clip_norm: 1.0
+  use_amp: true
+  checkpoint_frequency: 5

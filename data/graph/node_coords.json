@@ -1,0 +1,80 @@
+{
+  "nodes": [
+    {
+      "id": "N01",
+      "name": "Shivajinagar",
+      "lat": 18.5308,
+      "lon": 73.8475,
+      "characteristic": "Reference CPCB station"
+    },
+    {
+      "id": "N02",
+      "name": "Hinjewadi IT Park",
+      "lat": 18.5912,
+      "lon": 73.7389,
+      "characteristic": "Traffic + construction"
+    },
+    {
+      "id": "N03",
+      "name": "Pimpri-Chinchwad MIDC",
+      "lat": 18.6298,
+      "lon": 73.8037,
+      "characteristic": "Heavy industry"
+    },
+    {
+      "id": "N04",
+      "name": "Hadapsar",
+      "lat": 18.5089,
+      "lon": 73.9260,
+      "characteristic": "Mixed residential-commercial"
+    },
+    {
+      "id": "N05",
+      "name": "Katraj",
+      "lat": 18.4529,
+      "lon": 73.8669,
+      "characteristic": "Dense residential"
+    },
+    {
+      "id": "N06",
+      "name": "Deccan Gymkhana",
+      "lat": 18.5196,
+      "lon": 73.8399,
+      "characteristic": "High vehicular density"
+    },
+    {
+      "id": "N07",
+      "name": "Viman Nagar",
+      "lat": 18.5679,
+      "lon": 73.9143,
+      "characteristic": "Airport proximity"
+    },
+    {
+      "id": "N08",
+      "name": "Kothrud",
+      "lat": 18.5074,
+      "lon": 73.8077,
+      "characteristic": "Residential, cleaner"
+    },
+    {
+      "id": "N09",
+      "name": "Talegaon MIDC",
+      "lat": 18.7330,
+      "lon": 73.6554,
+      "characteristic": "Outer industrial"
+    },
+    {
+      "id": "N10",
+      "name": "Mundhwa",
+      "lat": 18.5326,
+      "lon": 73.9368,
+      "characteristic": "Downstream residential"
+    }
+  ],
+  "metadata": {
+    "city": "Pune",
+    "country": "India",
+    "timezone": "Asia/Kolkata",
+    "coordinate_system": "WGS84"
+  }
+}

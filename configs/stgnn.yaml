@@ -1,0 +1,18 @@
+# ST-GNN model configuration
+model:
+  seq_len: 72
+  forecast_horizon: 24
+  hidden_channels: 64
+  num_nodes: 10
+
+training:
+  batch_size: 32
+  learning_rate: 0.0005
+  epochs: 100
+  early_stopping_patience: 10
+  use_amp: true
+
+graph:
+  distance_threshold_km: 15
+  edge_weight_method: inverse_distance
+  normalize_adjacency: true
