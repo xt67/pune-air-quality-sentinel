@@ -287,9 +287,10 @@ def show_heatmap():
         )
     
     with col2:
-        map_style = st.selectbox(
+        st.selectbox(
             "Map Style:",
-            ["Light", "Dark", "Satellite"]
+            ["Light (CartoDB Positron)"],
+            disabled=True
         )
     
     with col3:
@@ -297,11 +298,17 @@ def show_heatmap():
     
     # Load pre-generated heatmap or create inline
     try:
-        from src.viz.heatmap import create_heatmap, PUNE_NODES
+        from src.viz.heatmap import create_heatmap, PUNE_NODES, get_aqi_category
         import numpy as np
         
-        # Generate AQI values based on scenario
-        np.random.seed(42)
+        # Generate AQI values based on scenario with unique seed per scenario
+        scenario_seeds = {
+            "Current (Moderate)": 42,
+            "Good Air Day": 123,
+            "Diwali Spike": 456,
+            "Peak Summer": 789,
+            "Post Monsoon": 321,
+        }
         scenario_base = {
             "Current (Moderate)": 120,
             "Good Air Day": 45,
@@ -310,41 +317,42 @@ def show_heatmap():
             "Post Monsoon": 85,
         }
         
+        np.random.seed(scenario_seeds[scenario])
         base = scenario_base[scenario]
-        aqi_values = {
-            node: int(np.clip(base + np.random.normal(0, base * 0.2), 20, 450))
-            for node in PUNE_NODES.keys()
-        }
+        
+        aqi_values = {}
+        for node_id, node_info in PUNE_NODES.items():
+            aqi = int(np.clip(base + np.random.normal(0, base * 0.25), 20, 480))
+            aqi_values[node_id] = aqi
         
         # Create heatmap
-        m = create_heatmap(aqi_values, show_heatmap=show_heatmap_layer)
+        title = f"Pune AQI - {scenario}"
+        m = create_heatmap(aqi_values, title=title, show_heatmap=show_heatmap_layer)
         
         # Display map
         from streamlit_folium import folium_static
         folium_static(m, width=1000, height=500)
         
-        # AQI table
+        # AQI table with station names
         st.subheader("📊 Station AQI Values")
         import pandas as pd
         
-        def get_category(aqi):
-            if aqi <= 50: return "Good"
-            elif aqi <= 100: return "Satisfactory"
-            elif aqi <= 200: return "Moderate"
-            elif aqi <= 300: return "Poor"
-            elif aqi <= 400: return "Very Poor"
-            else: return "Severe"
-        
         df = pd.DataFrame([
-            {"Station": k, "AQI": v, "Category": get_category(v)}
+            {
+                "Station": PUNE_NODES[k]["name"],
+                "Node": k,
+                "AQI": v,
+                "Category": get_aqi_category(v)
+            }
             for k, v in sorted(aqi_values.items(), key=lambda x: -x[1])
         ])
-        st.dataframe(df, use_container_width=True)
+        st.dataframe(df, use_container_width=True, hide_index=True)
         
-    except ImportError:
-        st.warning("⚠️ Folium components not fully loaded. Showing static heatmap.")
+    except ImportError as e:
+        st.warning(f"⚠️ Folium components not fully loaded: {e}")
         
         # Show pre-generated HTML
+        from pathlib import Path
         heatmap_files = list(Path("outputs/heatmaps").glob("*.html"))
         if heatmap_files:
             selected_file = heatmap_files[0]
