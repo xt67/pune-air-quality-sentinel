@@ -37,6 +37,9 @@ PAQS forecasts hyper-local Air Quality Index (AQI) values 24-48 hours in advance
 ### Model Comparison Dashboard
 ![Comparison](docs/screenshots/comparison.png)
 
+### Pollution HeatMap
+![Heatmap](docs/screenshots/heatmap.png) 
+
 </div>
 
 ## ✨ Features
