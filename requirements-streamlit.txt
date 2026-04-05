@@ -1,0 +1,19 @@
+# Streamlit Cloud deployment requirements (lightweight)
+# For full development requirements, see requirements.txt
+
+# Core
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Visualization
+matplotlib>=3.8.0
+seaborn>=0.13.0
+plotly>=5.18.0
+folium>=0.15.0
+
+# Web application
+streamlit>=1.29.0
+streamlit-folium>=0.17.0
+
+# Utilities
+branca>=0.6.0
