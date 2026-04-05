@@ -1,21 +1,52 @@
 # Pune Air Quality Sentinel (PAQS)
 
-AI-Based Air Quality Forecaster for Urban Pollution Monitoring
+<div align="center">
+
+![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.2+-red.svg)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.29+-FF4B4B.svg)
+![Tests](https://img.shields.io/badge/Tests-201%20passed-brightgreen.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+
+**AI-Powered Air Quality Forecasting for Smart City Planning**
+
+[Features](#-features) • [Screenshots](#-screenshots) • [Quick Start](#-quick-start) • [Model Performance](#-model-performance) • [Tech Stack](#️-tech-stack)
+
+</div>
+
+---
 
 ## 🎯 Overview
 
-PAQS forecasts hyper-local Air Quality Index (AQI) values 24-48 hours in advance for Pune neighborhoods. It combines time-series forecasting, geospatial analysis, and IoT simulation into a coherent ML pipeline.
+PAQS forecasts hyper-local Air Quality Index (AQI) values 24-48 hours in advance for Pune neighborhoods. It combines time-series forecasting, geospatial analysis, and deep learning into a production-ready ML pipeline.
 
-**Core Question:** "Is it safe to take a morning run in my neighborhood tomorrow?"
+**Core Question:** *"Is it safe to take a morning run in my neighborhood tomorrow?"*
 
-**Models:** ARIMA (baseline) → LSTM → Spatio-Temporal GNN
+**Models:** ARIMA (baseline) → LSTM (best) → Spatio-Temporal GNN
+
+## 📸 Screenshots
+
+<div align="center">
+
+### Project Overview
+![Overview](docs/screenshots/overview.png)
+
+### Live AQI Forecaster
+![Forecaster](docs/screenshots/forecaster.png)
+
+### Model Comparison Dashboard
+![Comparison](docs/screenshots/comparison.png)
+
+</div>
 
 ## ✨ Features
 
-- 🌍 **10 Pune neighborhoods** — Shivajinagar, Hinjewadi, Pimpri-Chinchwad, and more
+- 🌍 **10 Pune neighborhoods** — Shivajinagar, Kothrud, Hadapsar, Hinjewadi, and more
 - 📊 **Multi-horizon forecasting** — 24h and 48h ahead predictions
-- 🗺️ **Interactive heatmap** — Folium-based pollution visualization
-- ⚡ **Health advisories** — AQI category labels with recommendations
+- 🗺️ **Interactive heatmap** — Folium-based pollution visualization with AQI color coding
+- ⚡ **Health advisories** — Category-based recommendations (Good → Severe)
+- 🤖 **Multi-model ensemble** — Compare ARIMA, LSTM, and ST-GNN predictions
+- 📈 **Real-time dashboard** — 5-page Streamlit application
 
 ## 🏗️ Project Structure
 
@@ -115,13 +146,15 @@ streamlit run app/streamlit_app.py
 | N09 | Talegaon MIDC | Outer industrial |
 | N10 | Mundhwa | Downstream residential |
 
-## 📊 Success Metrics
+## 📊 Model Performance
 
-| Model | Target MAE (AQI) | RMSE |
-|-------|------------------|------|
-| ARIMA | ≤ 30 | - |
-| LSTM | ≤ 20 | - |
-| ST-GNN | ≤ 12 | ≤ 18 |
+| Model | MAE (24h) | RMSE | Category Accuracy |
+|-------|-----------|------|-------------------|
+| ARIMA | 87.36 | 112.45 | 58.0% |
+| **LSTM** 🏆 | **55.22** | **71.95** | 50.7% |
+| ST-GNN | 56.08 | 72.12 | 48.1% |
+
+> **Best Model:** LSTM achieves lowest MAE for single-station forecasts. ST-GNN provides spatial awareness for city-wide analysis.
 
 ## 🛠️ Tech Stack
 
@@ -147,4 +180,4 @@ MIT License
 
 ## 👨‍💻 Author
 
-Rayan — B.Tech Final Year Project (Data Science / AI-ML)
+**Rayan** — AI/ML & Data Science

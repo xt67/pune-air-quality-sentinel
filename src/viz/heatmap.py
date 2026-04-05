@@ -102,6 +102,7 @@ def create_heatmap(
     title: str = "Pune Air Quality Heatmap",
     save_path: Optional[str] = None,
     zoom_start: int = 12,
+    show_heatmap: bool = True,
 ) -> folium.Map:
     """
     Create an interactive Folium heatmap for Pune AQI predictions.
@@ -111,6 +112,7 @@ def create_heatmap(
         title: Title for the heatmap
         save_path: Path to save HTML file (optional)
         zoom_start: Initial zoom level
+        show_heatmap: Whether to show the heat layer (default True)
         
     Returns:
         folium.Map object
@@ -186,22 +188,23 @@ def create_heatmap(
         # Add to heatmap data (lat, lon, intensity)
         heat_data.append([node_info["lat"], node_info["lon"], aqi / 500])
     
-    # Add HeatMap layer
-    HeatMap(
-        heat_data,
-        min_opacity=0.3,
-        max_opacity=0.8,
-        radius=30,
-        blur=20,
-        gradient={
-            0.0: "#00E400",
-            0.2: "#92D050",
-            0.4: "#FFFF00",
-            0.6: "#FF7E00",
-            0.8: "#FF0000",
-            1.0: "#7E0023",
-        },
-    ).add_to(m)
+    # Add HeatMap layer (conditional)
+    if show_heatmap:
+        HeatMap(
+            heat_data,
+            min_opacity=0.3,
+            max_opacity=0.8,
+            radius=30,
+            blur=20,
+            gradient={
+                0.0: "#00E400",
+                0.2: "#92D050",
+                0.4: "#FFFF00",
+                0.6: "#FF7E00",
+                0.8: "#FF0000",
+                1.0: "#7E0023",
+            },
+        ).add_to(m)
     
     # Save if path provided
     if save_path:

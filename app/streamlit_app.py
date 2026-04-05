@@ -75,8 +75,8 @@ selected_page = st.sidebar.radio("Navigate to:", list(pages.keys()))
 st.sidebar.markdown("---")
 st.sidebar.info(
     "**Pune Air Quality Sentinel**\n\n"
-    "B.Tech Final Year Project\n"
-    "AI-based Air Quality Forecasting"
+    "AI-powered Air Quality Forecasting\n"
+    "for Smart City Planning"
 )
 
 
@@ -592,6 +592,6 @@ page_functions[page_key]()
 st.markdown("---")
 st.markdown(
     '<p style="text-align: center; color: #888;">Pune Air Quality Sentinel (PAQS) | '
-    'B.Tech Final Year Project | Built with Streamlit</p>',
+    'AI-Powered Air Quality Forecasting | Built with Streamlit</p>',
     unsafe_allow_html=True
 )
